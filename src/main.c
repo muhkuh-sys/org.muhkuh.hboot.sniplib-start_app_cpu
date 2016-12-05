@@ -108,7 +108,9 @@ void __attribute__ ((section (".init_code"))) start(void)
 								sha384_update_ul(*(pulCnt++));
 							}
 
-							sha384_finalize(aulHash, sizeof(aulHash)/sizeof(unsigned long), ulApplicationSizeInDwords);
+							ulValue  = ulApplicationSizeInDwords;
+							ulValue += sizeof(tAppCpuIntflashImage.aulCM4Vectors) / sizeof(unsigned long);
+							sha384_finalize(aulHash, sizeof(aulHash)/sizeof(unsigned long), ulValue);
 
 							/* Compare the hash. */
 							ulValue = 0;
